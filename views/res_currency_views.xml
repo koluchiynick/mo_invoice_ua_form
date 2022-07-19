@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>    
+        <record id="view_currency_form_inherit_mo_invoice_ua_form" model="ir.ui.view">
+            <field name="name">res.currency.form.inherit mo_invoice_ua_form</field>
+            <field name="model">res.currency</field>
+            <field name="inherit_id" ref="base.view_currency_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[contains(@groups,'base.group_no_one')]" position="after">
+                    <group>
+                        <field name="mo_currency_unit_print_label"/>
+                        <field name="mo_currency_subunit_print_label"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

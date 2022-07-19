@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>    
+        <record id="view_partner_form_inherit_mo_invoice_ua_form" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit mo_invoice_ua_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="//div[contains(@class,'oe_title')]" position="after"> -->
+                <xpath expr="//div[hasclass('oe_title')]" position="after">
+                    <group>                        
+                        <field name="mo_full_name"/>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="mo_edrpou" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                    <field name="mo_income_tax_payer" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                    <field name="mo_document_signer" widget="res_partner_many2one" domain="[('is_company', '=', False)]" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>    
+    </data>
+</odoo>
