@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-07 16:30+0000\n"
-"PO-Revision-Date: 2022-07-07 16:30+0000\n"
+"POT-Creation-Date: 2022-07-20 10:04+0000\n"
+"PO-Revision-Date: 2022-07-20 10:04+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,16 +16,86 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mo_invoice_ua_form
-#: model:ir.actions.report,print_report_name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_rah
-msgid "'Rahunok UA - %s' % (object.name)"
-msgstr "'Рахунок на оплату - %s' % (object.name)"
+#: model:ir.actions.report,print_report_name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_akt
+msgid "'Akt - %s' % (object.name)"
+msgstr ""
 
 #. module: mo_invoice_ua_form
-#: model_terms:ir.ui.view,arch_db:mo_invoice_ua_form.invoice_rahunok_document
-msgid "<u>Vendor:</u>"
-msgstr "<u>Постачальник:</u>"
+#: model:ir.actions.report,print_report_name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_rah
+msgid "(object._get_report_base_filename())"
+msgstr "'Рахунок на оплату - %s' % (object.name)"
+
+
+#. module: mo_invoice_ua_form
+#: model:ir.actions.report,name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_akt
+msgid "Akt UA"
+msgstr "Акт про надання послуг"
+
+#. module: mo_invoice_ua_form
+#: model:ir.model,name:mo_invoice_ua_form.model_res_partner
+msgid "Contact"
+msgstr "Контакт"
+
+#. module: mo_invoice_ua_form
+#: model:ir.model,name:mo_invoice_ua_form.model_res_currency
+msgid "Currency"
+msgstr "Валюта"
+
+#. module: mo_invoice_ua_form
+#: model:ir.model.fields,help:mo_invoice_ua_form.field_res_currency__mo_currency_subunit_print_label
+msgid "Currency Subunit Print Name"
+msgstr "'Копейки имя для печати"
+
+#. module: mo_invoice_ua_form
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_currency__mo_currency_subunit_print_label
+msgid "Currency Subunit print label"
+msgstr "Копейки имя для печати"
+
+#. module: mo_invoice_ua_form
+#: model:ir.model.fields,help:mo_invoice_ua_form.field_res_currency__mo_currency_unit_print_label
+msgid "Currency Unit Print Name"
+msgstr "Имя для печати"
+
+#. module: mo_invoice_ua_form
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_currency__mo_currency_unit_print_label
+msgid "Currency Unit print label"
+msgstr "Имя для печати"
+
+#. module: mo_invoice_ua_form
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_library_member__mo_document_signer
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_partner__mo_document_signer
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_users__mo_document_signer
+msgid "Document signer"
+msgstr "Подписант документов"
+
+#. module: mo_invoice_ua_form
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_library_member__mo_edrpou
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_partner__mo_edrpou
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_users__mo_edrpou
+msgid "EDRPOU"
+msgstr "ЄДРПОУ"
+
+#. module: mo_invoice_ua_form
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_library_member__mo_full_name
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_partner__mo_full_name
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_users__mo_full_name
+msgid "Full name"
+msgstr "Полное наименование"
+
+#. module: mo_invoice_ua_form
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_library_member__mo_income_tax_payer
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_partner__mo_income_tax_payer
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_users__mo_income_tax_payer
+msgid "Income Tax Payer"
+msgstr "Платник податку на прибуток"
 
 #. module: mo_invoice_ua_form
 #: model:ir.actions.report,name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_rah
 msgid "Invoice UA Rahunok"
 msgstr "Рахунок на оплату"
+
+#. module: mo_invoice_ua_form
+#: model:ir.model,name:mo_invoice_ua_form.model_account_move
+msgid "Journal Entry"
+msgstr "Запис у журналі"
+
