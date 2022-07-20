@@ -4,7 +4,7 @@
         
 
         <template id="invoice_rahunok_document">
-            <t t-call="web.external_layout">
+            <t t-call="web.basic_layout">
                 <t t-set="o" t-value="o.with_context(lang=lang)" />
                 
                 

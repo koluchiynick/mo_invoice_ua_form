@@ -18,11 +18,11 @@ msgstr ""
 #. module: mo_invoice_ua_form
 #: model:ir.actions.report,print_report_name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_akt
 msgid "'Akt - %s' % (object.name)"
-msgstr ""
+msgstr "'Акт надання послуг - %s' % (object.name)"
 
 #. module: mo_invoice_ua_form
 #: model:ir.actions.report,print_report_name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_rah
-msgid "(object._get_report_base_filename())"
+msgid "'Invoice - %s' % (object.name)"
 msgstr "'Рахунок на оплату - %s' % (object.name)"
 
 
