@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="invoice_ua_document">
+            <t t-call="web.basic_layout">
+                <t t-set="o" t-value="o.with_context(lang='uk_UA')"/>
+                <t t-set="o_en" t-value="o.with_context(lang='en')"/>
+                <t t-set="currency" t-value="o.currency_id"/>                
+                                
+                <div class="page">
+                    <div style="font-weight: bold; width: 100%; text-align: center;">
+                        <span>Invoice / Інвойс № </span>
+                        <span t-field="o.name"/>
+                    </div>
+                    <div style="height: 10px;"></div>
+                    <table width="100%" cellpadding="2" cellspacing="2" style="font-family: Arial; border: 1px solid; border-collapse: collapse;">
+                        <tr style="border: 1px solid;">
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">
+                                <span style="font-weight: bold;">Date of invoice:</span>
+                                <span t-field="o.invoice_date" t-options="{'format': 'dd.MM.YYYY'}"/>
+                            </td>
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">
+                                <span style="font-weight: bold;">Дата інвойсу:</span>
+                                <span t-field="o.invoice_date" t-options="{'format': 'dd.MM.YYYY'}"/>
+                            </td>            
+                        </tr> 
+                        <tr style="border: 1px solid;">
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">
+                                <div>
+                                    <span style="font-weight: bold;">Supplier:</span>
+                                    <t t-if="o_en.company_id.partner_id.mo_full_name">
+                                        <span t-field="o_en.company_id.partner_id.mo_full_name"/>
+                                    </t>
+                                    <t t-else="">
+                                        <span t-field="o_en.company_id.partner_id.name"/>
+                                    </t>
+                                </div>
+                                <div>
+                                    <!-- <span>address: 14000, Ukraine, Chernihiv, Honcha Street, Building 52a, App 68</span> -->
+                                    <span>Address: <span t-field="o_en.company_id.partner_id.contact_address" /></span>
+                                </div>
+                                <div>
+                                    <!-- <span>ITN - 2986614114</span> -->
+                                    <span>ITN - <span t-field="o.company_id.partner_id.vat"/></span>
+                                </div>
+                            </td>
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">
+                                <div>
+                                    <span style="font-weight: bold;">Виконавець:</span>
+                                    <!-- <span >ФО-П Остроух Микола Андрійович</span> -->
+                                    <t t-if="o.company_id.partner_id.mo_full_name">
+                                        <span t-field="o.company_id.partner_id.mo_full_name"/>
+                                    </t>
+                                    <t t-else="">
+                                        <span t-field="o.company_id.partner_id.name"/>
+                                    </t>
+                                </div>
+                                <div>
+                                    <!-- <span>Адреса: 14000, Україна, Чернігівська обл., місто Чернігів, вулиця Гонча 52а, квартира 68</span> -->
+                                    <span>Адреса: <span t-field="o.company_id.partner_id.contact_address" /></span>
+                                </div>
+                                <div>
+                                    <!-- <span>ІПН - 2986614114</span> -->
+                                    <span>ІПН - <span t-field="o.company_id.partner_id.vat"/></span>
+                                </div>
+                            </td>            
+                        </tr>
+                        <tr style="border: 1px solid;">
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">
+                                <div>
+                                    <span style="font-weight: bold;">Customer/Payer:</span>
+                                    <t t-if="o_en.partner_id.mo_full_name">
+                                        <span t-field="o_en.partner_id.mo_full_name"/>
+                                    </t>
+                                    <t t-else="">
+                                        <span t-field="o_en.partner_id.name"/>
+                                    </t>
+                                </div>
+                                <div>
+                                    <span>Address: <span t-field="o_en.partner_id.contact_address" /></span>
+                                </div>
+                                <div>
+                                    <!-- <span>Reg. nr.: 52403036931</span> -->
+                                    <span>Reg. nr.: <span t-field="o.partner_id.mo_edrpou"/></span>
+                                </div>
+                                <div>
+                                    <!-- <span>VAT reg. nr.: LV52403036931</span> -->
+                                    <span>VAT reg. nr.: <span t-field="o.partner_id.vat"/></span>
+                                </div>
+                            </td>
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">
+                                <div>
+                                    <span style="font-weight: bold;">Замовник/Платник:</span>
+                                    <t t-if="o.partner_id.mo_full_name">
+                                        <span t-field="o.partner_id.mo_full_name">,</span>
+                                    </t>
+                                    <t t-else="">
+                                        <span t-field="o.partner_id.name"/>
+                                    </t>
+                                </div>
+                                <div>
+                                    <span>Адреса: <span t-field="o.partner_id.contact_address" /></span>
+                                </div>
+                                <div>
+                                    <!-- <span>Reg. nr.: 52403036931</span> -->
+                                    <span>Reg. nr.: <span t-field="o.partner_id.mo_edrpou"/></span>
+                                </div>
+                                <div>
+                                    <!-- <span>VAT reg. nr.: LV52403036931</span> -->
+                                    <span>VAT reg. nr.: <span t-field="o.partner_id.vat"/></span>
+                                </div>
+                            </td>            
+                        </tr> 
+                        <tr style="border: 1px solid;">
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">
+                                <span style="font-weight: bold;">Description:</span>
+                                <t t-if="o.invoice_line_ids[0]">
+                                    <span t-field="o_en.invoice_line_ids[0].product_id.name"/>
+                                </t>
+                                <t t-else="">
+                                    <span >Software Development</span>
+                                </t>                                
+                            </td>
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">
+                                <span style="font-weight: bold;">Опис:</span>
+                                <t t-if="o.invoice_line_ids[0]">
+                                    <span t-field="o.invoice_line_ids[0].product_id.name"/>
+                                </t>
+                                <t t-else="">
+                                    <span>Розробка програмного забезпечення</span>
+                                </t>                 
+                            </td>            
+                        </tr>
+                        <tr style="border: 1px solid;">
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">
+                                <span style="font-weight: bold;">Currency:</span>
+                                <!-- <span >EUR</span> -->
+                                <span t-esc="currency.name"/>
+                            </td>
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">
+                                <span style="font-weight: bold;">Валюта:</span>
+                                <!-- <span>ЄВРО</span>               -->
+                                <span t-esc="currency.currency_name_to_ua()"/>  
+                            </td>            
+                        </tr>
+                        <tr style="border: 1px solid;">
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">
+                                <span style="font-weight: bold;">Price (amount) of the goods/services:</span>
+                                <!-- <span>1210.00</span> -->
+                                <span t-esc="'{:10.2f}'.format(o.amount_total)"/>
+                            </td>
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">
+                                <span style="font-weight: bold;">Ціна (загальна вартість) товарів/послуг:</span>
+                                <!-- <span>1210.00</span>  -->
+                                <span t-esc="'{:10.2f}'.format(o.amount_total)"/>               
+                            </td>            
+                        </tr> 
+                        <tr style="border: 1px solid;">
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">
+                                <span style="font-weight: bold;">Terms of payments and acceptation:</span>
+                                <span>Postpayment of 100% upon the services delivery.</span>
+                            </td>
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">
+                                <span style="font-weight: bold;">Умови оплати та передачі:</span>
+                                <span>100% післяплата за фактом виконання послуг.</span>                
+                            </td>            
+                        </tr> 
+                        <tr style="border: 1px solid;">
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">                
+                                <div>
+                                    <span style="font-weight: bold;">Customer Bank information:</span>                    
+                                </div>
+                                <div>
+                                    <span>Beneficiary:</span>
+                                    <span t-field="o_en.partner_id.mo_main_bank_account_id.acc_holder_name"></span>
+                                </div>
+                                <div>
+                                    <span>Account # :</span>
+                                    <!-- <span style="font-weight: bold;">PL46160014621822174350000002</span> -->
+                                    <span style="font-weight: bold;" t-field="o.partner_id.mo_main_bank_account_id.acc_number"></span>                    
+                                </div>
+                                <div>
+                                    <span>Beneficiary’s bank:</span>
+                                    <span t-field="o_en.partner_id.mo_main_bank_account_id.bank_id.name"></span>
+                                </div>
+                                <div>
+                                    <span>SWIFT code:</span>
+                                    <span t-field="o_en.partner_id.mo_main_bank_account_id.bank_id.bic"></span>
+                                </div>
+                            </td>
+                            <td style="border: 1px solid; width: 50%; vertical-align: top;">
+                                <div>
+                                    <span style="font-weight: bold;">Supplier Bank information:</span>                    
+                                </div>
+                                <div>
+                                    <span>Beneficiary:</span>
+                                    <span t-field="o.company_id.partner_id.mo_main_bank_account_id.acc_holder_name"></span>
+                                </div>
+                                <div>
+                                    <span>Account # :</span>
+                                </div>
+                                <div>
+                                    <span style="font-weight: bold;">IBAN:</span>
+                                    <span t-field="o.company_id.partner_id.mo_main_bank_account_id.acc_number"/>
+                                </div>
+                                <div>
+                                    <span style="font-weight: bold;">Beneficiary’s bank:</span>
+                                    <span t-field="o_en.company_id.partner_id.mo_main_bank_account_id.bank_id.name"/>
+                                </div>
+                                <t t-set="mo_main_bank" t-value="o_en.company_id.partner_id.mo_main_bank_account_id.bank_id"/>  
+                                <div>
+                                    <span >Address:</span>
+                                    <span t-esc="'{} Str., {}, {}, {}'.format(mo_main_bank.street,mo_main_bank.city,mo_main_bank.zip,mo_main_bank.country.name)" />                                    
+                                </div>
+                                <div>
+                                    <span style="font-weight: bold;">SWIFT BIC:</span>
+                                    <span t-field="o_en.company_id.partner_id.mo_main_bank_account_id.bank_id.bic"/>
+                                </div>
+                                <t t-set="correspondent_number" t-value="1"/>
+                                <t t-foreach="o_en.company_id.partner_id.mo_main_bank_account_id.bank_id.mo_correspondent_bank_ids" t-as="line">
+                                    <div>
+                                        <span style="font-weight: bold;">Correspondent bank #<span t-esc="correspondent_number"/></span>
+                                        <!-- <span>Commerzbank AG</span> -->
+                                        <span t-field="line.name"/>
+                                    </div>
+                                    <div>
+                                        <span style="font-weight: bold;">SWIFT BIC:</span>
+                                        <!-- <span>COBADEFF</span> -->
+                                        <span t-field="line.bic"/>
+                                    </div>
+                                    <t t-set="correspondent_number" t-value="correspondent_number + 1"/>
+                                </t>
+                                <!-- <div>
+                                    <span style="font-weight: bold;">Correspondent bank #1:</span>
+                                    <span>Commerzbank AG</span>
+                                </div>
+                                <div>
+                                    <span style="font-weight: bold;">SWIFT BIC:</span>
+                                    <span>COBADEFF</span>
+                                </div>
+                                <div>
+                                    <span style="font-weight: bold;">Correspondent bank #2:</span>
+                                    <span>Raiffeisen Bank International AG</span>
+                                </div>
+                                <div>
+                                    <span style="font-weight: bold;">SWIFT BIC:</span>
+                                    <span>RZBAATWW</span>
+                                </div>
+                                <div>
+                                    <span style="font-weight: bold;">Correspondent bank #3:</span>
+                                    <span>andesbank Baden- Wurttemberg</span>
+                                </div>
+                                <div>
+                                    <span style="font-weight: bold;">SWIFT BIC:</span>
+                                    <span>SOLADEST</span>
+                                </div>             -->
+                            </td>            
+                        </tr> 
+                    </table>
+                    <div style="height: 15px;"></div>
+                    <style>
+                        #product_table td, #product_table th {
+                            padding: 5px 5px;
+                            border: 1px solid;
+                            text-align: center;
+                            }
+                    </style>
+                    <table id="product_table" width="100%" cellpadding="2" cellspacing="2" style="border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th style="width:10%; " >№</th>
+                                <th style="width:50%; ">Description/ Опис</th>
+                                <th style="width:10%;" >Quantity/ Кількість</th>
+                                <!-- <th style="width:10%; " >Price, EUR Ціна, ЄВРО</th> -->
+                                <th style="width:10%; " t-esc="'Price, {}/ Ціна, {}'.format(currency.name,currency.currency_name_to_ua())"></th>
+                                <!-- <th style="width:20%; " >Amount, EUR / Загальна вартість, ЄВРО</th> -->
+                                <th style="width:10%; " t-esc="'Amount, {}/ Загальна вартість, {}'.format(currency.name,currency.currency_name_to_ua())"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="current_number_row" t-value="0"/>
+                            <t t-foreach="o.invoice_line_ids" t-as="line">
+                                <t t-set="current_number_row" t-value="current_number_row + 1"/>
+                                <tr>
+                                    <td style="width:10%; " >
+                                        <span t-raw="current_number_row"/>
+                                    </td>
+                                    <td style="text-align: left;">
+                                        <span t-field="line.product_id.name"/>
+                                    </td>
+                                    <td style="width:10%; text-align: right;" >
+                                        <!-- <span t-field="line.quantity"/> -->
+                                        <span t-esc="line.quantity"/>
+                                    </td>
+                                    <td style="width:10%; text-align: right;" >
+                                        <!-- <span t-field="line.price_unit"/> -->
+                                        <span t-esc="'{:10.2f}'.format(line.price_unit)"/>
+                                    </td>
+                                    <td style="width:20%; text-align: right;" >
+                                        <span t-esc="'{:10.2f}'.format(line.price_subtotal)"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td style="width:10%; "></td>
+                                <td style="text-align: left;"></td>
+                                <td style="width:10%; text-align: right;" ></td>
+                                <td style="width:10%; text-align: right;" >
+                                    <span>Total/Усього:</span>
+                                </td>
+                                <td style="width:20%; text-align: right;" >
+                                    <span t-esc="'{:10.2f}'.format(o.amount_total)"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="width:10%; text-align: left;" >
+                                    <div>
+                                        <span>Total/Усього:</span>
+                                        <span t-esc="currency.amount_to_text(o.amount_total,'en').capitalize()"/>
+                                    </div>
+                                    <div>
+                                        <span>Усього до сплати:</span>
+                                        <span t-esc="currency.amount_to_text(o.amount_total).capitalize()"/>
+                                        <!-- <span>Одна тисяча двісті десять ЕВРО 00 центів</span> -->
+                                    </div>                    
+                                </td>
+                                <td style="width:20%; text-align: right;" >
+                                    <span t-esc="'{:10.2f}'.format(o.amount_total)"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="height: 10px;"></div>
+                    <div>
+                        <span>
+                            Payment hereof at the same time is the evidence of the service delivery, acceptance thereof in full scope and the confirmation of final mutual installments between Parties. / Оплата згідно цього Інвойсу одночасно є свідченням надання послуг, їх прийняття в повному обсязі, а також підтвердженням кінцевих розрахунків між Сторонами.
+                        </span>
+                    </div>
+                    <div style="height: 10px;"></div>
+                    <div>
+                        <span>
+                            The Parties shall not be liable for non-performance or improper performance of the obligations under the agreement during the term of insuperable force circumstances. / Сторони звільняються від відповідальності за невиконання чи неналежне виконання зобов’язань за договором на час дії форс-мажорних обставин.
+                        </span>
+                    </div>
+                    <div style="height: 10px;"></div>
+                    <div>
+                        <span>
+                            Payment according hereto shall be also the confirmation that Parties have no claims to each other and have no intention to submit any claims. / Оплата згідно цього Інвойсу є підтвердженням того, що Сторони не мають взаємних претензій та не мають наміру направляти рекламації.
+                        </span>
+                    </div>
+                    <div style="height: 10px;"></div>
+                    <div>
+                        <span>
+                            Any disputes arising out of the agreement between the Parties shall be settled by the competent court at the location of a defendant. / Всі спори, що виникнуть між Сторонами по угоді будуть розглядатись компетентним судом за місцезнаходження відповідача.
+                        </span>
+                    </div>
+                    <div style="height: 30px;"></div>
+                    <div align="center">
+                        <t t-if="print_facsimile">
+                            <img style="max-height:100px; max-width:100px; position: relative; right: 5%; top: 50px;"
+                                t-att-src="'data:image/png;base64,%s' % to_text(o.company_id.sign_image)"/>
+                        </t>                        
+                        <div>
+                            <span>Supplier/Виконавець:</span>
+                            <span>________________________</span>
+                            <t t-if="o_en.invoice_user_id.mo_full_name">
+                                <span t-esc="'({}/{})'.format(o_en.invoice_user_id.mo_full_name,o.invoice_user_id.mo_full_name)"/>                                
+                            </t>
+                            <t t-else="">
+                                <span t-esc="'({})'.format(o.invoice_user_id.name)"/>                                
+                            </t>                            
+                        </div>       
+                    </div>
+                </div>
+            </t>
+        </template>
+
+    
+        <template id="invoice_ua">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.partner_id.lang"/>
+                    <t t-set="print_facsimile" t-value="False"/>
+                    <t t-call="mo_invoice_ua_form.invoice_ua_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+        <template id="invoice_ua_facsimile">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.partner_id.lang"/>
+                    <t t-set="print_facsimile" t-value="True"/>
+                    <t t-call="mo_invoice_ua_form.invoice_ua_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+    
+    </data>
+</odoo>

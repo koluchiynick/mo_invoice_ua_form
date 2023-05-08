@@ -1,5 +1,61 @@
 <div class="page" style="width: 210mm; display: block">
     <br/>
+    <div style="width: 100%; text-align: center;">Зразок заповнення платіжного доручення</div>    
+    <table width="100%" style="font-family: Arial; border: 1px solid; padding:5px;">
+        <tr>
+            <td>
+               <div>Отримувач</div>
+            </td>
+            <td colspan="4">
+                <div>
+                    <div style="font-weight:bold;">
+                        <t t-if="o.company_id.partner_id.name">
+                            <span t-field="o.company_id.partner_id.name">ФОП Остроух М. А.</span>
+                        </t>
+                        <t t-else="">
+                            <span t-field="o.company_id.partner_id.name"/>
+                        </t>
+                    </div>                    
+                </div>
+            </td>            
+        </tr>
+        <tr>
+            <td style="width: 20%;">
+               <div>Код</div>
+            </td>
+            <td style="border: 1px solid; text-align: center; width: 20%;">
+                <div style="font-weight:bold;">
+                    <span t-field="o.company_id.company_registry"></span>                    
+                </div>
+            </td> 
+            <td></td>  
+            <td></td>  
+            <td></td>           
+        </tr>
+        <tr>
+            <td colspan="2">
+               <div>Банк отримувача</div>
+            </td>
+            <td></td> 
+            <td style="text-align: center;">
+                <div>КРЕДИТ рах. №</div>
+            </td>
+            <td></td>
+        </tr>
+        <tr style="height: 20px;">
+            <td colspan="2" style="font-weight: bold; ">
+                <div></div>
+            </td>
+            <td></td> 
+            <td style="border: 1px solid; text-align: center; width: 40%;">
+                <div style="font-weight:bold;">
+                    <span t-field="o.company_id.company_registry"></span>                    
+                </div>
+            </td>  
+            <td></td>          
+        </tr>
+    </table>
+    <br/>
     <div style="font-weight: bold; font-size: 16pt; padding-left:5px; font-family: Arial;">
         <span>Рахунок на оплату № </span>
         <span t-field="o.name"/> 
@@ -195,7 +251,14 @@
     </div>
     <div style="background-color:#000000; width:100%; font-size:1px; height:2px;"></div>
     <br/>
-    <table width="100%" cellpadding="0" cellspacing="0">
+    <div align="right">
+        <span >Виписав(ла):</span>
+        <span style="white-space:nowrap;">________________________</span>
+    </div>
+    <div align="right">
+        <span style="white-space:nowrap;">Остроух М. А.</span>
+    </div>
+    <!-- <table width="100%" cellpadding="0" cellspacing="0">
         <tr>
             <td width="100%" align="right">
                 Виписав(ла):
@@ -214,6 +277,6 @@
                 </t> 
             </td>
         </tr>
-    </table>
+    </table> -->
 
 </div>

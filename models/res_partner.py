@@ -12,3 +12,9 @@ class Partner(models.Model):
     mo_income_tax_payer = fields.Boolean('Income Tax Payer')
     mo_document_signer = fields.Many2one(comodel_name='res.partner',
                                          string='Document signer')
+    mo_main_bank_account_id = fields.Many2one(
+        comodel_name='res.partner.bank',
+        string="Main bank account",
+        domain="[('partner_id', '=', id)]",
+        help="Bank account number to which the invoice will be paid by default."
+    )

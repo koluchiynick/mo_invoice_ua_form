@@ -1,14 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>    
-        
+    <data>
 
         <template id="invoice_rahunok_document">
             <t t-call="web.basic_layout">
-                <t t-set="o" t-value="o.with_context(lang=lang)" />
-                
-                
-                <div class="page" style="width: 210mm; display: block">
+                <t t-set="o" t-value="o.with_context(lang='uk_UA')"/>
+                <t t-set="currency" t-value="o.currency_id"/>                
+                                
+                <div class="page">
+                    <div style="width: 100%; text-align: center;">Зразок заповнення платіжного доручення</div>    
+                    <table width="100%" style="font-family: Arial; border: 1px solid; padding:5px; border-collapse: inherit;">
+                        <tr style="padding:5px;">
+                            <td>
+                                <div>Отримувач</div>
+                            </td>
+                            <td colspan="4">
+                                <div>
+                                    <div style="font-weight:bold;">
+                                        <t t-if="o.company_id.partner_id.mo_full_name">
+                                            <span t-field="o.company_id.partner_id.mo_full_name"></span>                                            
+                                        </t>
+                                        <t t-else="">
+                                            <span t-field="o.company_id.partner_id.name"/>
+                                        </t>
+                                    </div>                    
+                                </div>
+                            </td>            
+                        </tr>
+                        <tr>
+                            <td style="width: 20%;">
+                                <div>Код</div>
+                            </td>
+                            <td style="border: 1px solid; text-align: center; width: 20%;">
+                                <div style="font-weight:bold;">
+                                    <t t-if="o.company_id.company_registry">
+                                        <span t-field="o.company_id.company_registry"></span>
+                                    </t>
+                                    <t t-else="">
+                                        <span>        </span>
+                                    </t>
+                                </div>
+                            </td> 
+                            <td></td>  
+                            <td></td>  
+                            <td></td>           
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div>Банк отримувача</div>
+                            </td>
+                            <td></td> 
+                            <td style="text-align: center;">
+                                <div>КРЕДИТ рах. №</div>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td colspan="2" style="font-weight: bold;">
+                                <div t-field="o.company_id.partner_id.mo_main_bank_account_id.bank_id.name"></div>
+                            </td>
+                            <td></td> 
+                            <td style="border: 1px solid; text-align: center; width: 40%;">
+                                <div style="font-weight:bold;">
+                                    <span t-field="o.company_id.partner_id.mo_main_bank_account_id.acc_number"></span>                    
+                                </div>
+                            </td>  
+                            <td></td>          
+                        </tr>
+                    </table>
                     <br/>
                     <div style="font-weight: bold; font-size: 16pt; padding-left:5px; font-family: Arial;">
                         <span>Рахунок на оплату № </span>
@@ -34,11 +93,11 @@
                                         </t>
                                     </div>
                                     <div>
-                                        <span>ІНП <span t-field="o.company_id.partner_id.vat"/>,</span>
+                                        <span>ІПН <span t-field="o.company_id.partner_id.vat"/>,</span>
                                         <span>ЄДРПОУ <span t-field="o.company_id.company_registry"/>,</span>
-                                        <span>р/р <span t-field="o.company_id.partner_id.bank_ids.acc_number"/>
-                                            <t t-if="o.company_id.partner_id.bank_ids.bank_id">
-                                                в <span t-field="o.company_id.partner_id.bank_ids.bank_id.name"/>
+                                        <span>р/р <span t-field="o.company_id.partner_id.mo_main_bank_account_id.acc_number"/>
+                                            <t t-if="o.company_id.partner_id.mo_main_bank_account_id.bank_id">
+                                                у банку <span t-field="o.company_id.partner_id.mo_main_bank_account_id.bank_id.name"/>
                                             </t>,
                                         </span>
                                         <span>Адреса: <span t-field="o.company_id.partner_id.contact_address" />,</span>
@@ -69,7 +128,7 @@
                                     </div>
                                     <div>
                                         <t t-if="o.partner_id.vat">
-                                            <span>ІНП <span t-field="o.partner_id.vat"/>,</span>
+                                            <span>ІПН <span t-field="o.partner_id.vat"/>,</span>
                                         </t>
                                         <t t-if="o.partner_id.mo_edrpou">
                                             <span>ЄДРПОУ <span t-field="o.partner_id.mo_edrpou"/>,</span>
@@ -143,7 +202,7 @@
                                         <span t-field="line.price_unit"/>
                                     </td>
                                     <td style="width:27mm; text-align: right;">
-                                        <span t-esc="'{:10.2f}'.format(line.price_subtotal).replace('.',',')"/>
+                                        <span t-esc="'{:10.2f}'.format(line.price_subtotal).replace('.',',')"/>                                        
                                     </td>
                                 </tr>
                             </t>
@@ -163,19 +222,19 @@
                             <tr>
                                 <td >Разом без ПДВ:</td>
                                 <td style="width:27mm;">
-                                    <span t-esc="'{:10.2f}'.format(o.amount_untaxed).replace('.',',')"/>
+                                    <span t-esc="'{:10.2f}'.format(o.amount_untaxed).replace('.',',')"/>                                    
                                 </td>
                             </tr>
                             <tr>
                                 <td >ПДВ:</td>
                                 <td >
-                                    <span t-esc="'{:10.2f}'.format(o.amount_tax).replace('.',',')"/>
+                                    <span t-esc="'{:10.2f}'.format(o.amount_tax).replace('.',',')"/>                                    
                                 </td>
                             </tr>
                             <tr>
                                 <td >Всього з ПДВ:</td>
                                 <td >
-                                    <span t-esc="'{:10.2f}'.format(o.amount_total).replace('.',',')"/>
+                                    <span t-esc="'{:10.2f}'.format(o.amount_total).replace('.',',')"/>                                    
                                 </td>
                             </tr>
                         </t>
@@ -183,7 +242,7 @@
                             <tr>
                                 <td >Разом:</td>
                                 <td style="width:27mm;">
-                                    <span t-esc="'{:10.2f}'.format(o.amount_total).replace('.',',')"/>
+                                    <span t-esc="'{:10.2f}'.format(o.amount_total).replace('.',',')"/>                                    
                                 </td>
                             </tr>
                             <tr>
@@ -195,45 +254,34 @@
                         </t>
                         
                     </table>
-
+                   
                     <div>
                         <br/>
-                        <span t-esc="'Всього найменувань {}, на суму {:10.2f}'.format(current_number_row,o.amount_total).replace('.',',')+' {}'.format(o.currency_id.mo_currency_unit_print_label)"/>
+                        <span t-esc="'Всього найменувань {}, '.format(len(o.invoice_line_ids))+'на суму {:10.2f}'.format(o.amount_total).replace('.',',')+' грн.'"/>
                         <br/>
-                        <span style="font-weight: bold; font-family: Arial;" t-esc="o.amount_to_ukr_text(o.amount_total)"/>
-                        <br/>
-                        <br/>
+                        <span style="font-weight: bold; font-family: Arial;" t-esc="currency.amount_to_text(o.amount_total).capitalize()"/>
+                        <p t-if="o.amount_tax"><span class="title">у т.ч. ПДВ:</span> <t t-esc="currency.amount_to_text(o.amount_tax)" /></p>                                          
                     </div>
-                    <div>
-                        Оплата даного рахунку означає згоду з умовами поставки товару.
-                        <br/>
-                        Повідомлення про оплату обов`язкове, інакше не гарантується наявність товару на складі.
-                        <br/>
-                        Товар відпускається за фактом надходження коштів на р/р Постачальника, самовивозом, за наявності довіреності і паспорта.
-                        <br/>
-                    </div>
+                                        
                     <div style="background-color:#000000; width:100%; font-size:1px; height:2px;"></div>
-                    <br/>
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td width="100%" align="right">
-                                Виписав(ла):
-                            </td>
-                            <td>
-                                <span style="white-space:nowrap;">________________________</span>                
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="100%" align="right">                
-                            </td>
-                            <td width="100%" align="right">
-                                <t t-if="o.invoice_user_id">
-                                    <span t-field="o.invoice_user_id.name"/>
-                                </t> 
-                            </td>
-                        </tr>
-                    </table>
-                
+                    <t t-if="not print_facsimile">
+                        <div style="height:35px;"></div>    
+                    </t>
+                    <div align="right">
+                        <t t-if="print_facsimile">
+                            <img style="max-height:100px; max-width:100px; position: relative; right: 5%; top: 50px;"
+                                        t-att-src="'data:image/png;base64,%s' % to_text(o.company_id.sign_image)"/>
+                        </t>                        
+                        <div> 
+                            <span>Виписав(ла):</span>
+                            <span>________________________</span>
+                        </div>
+                    </div>
+                    <div align="right">
+                        <t t-if="o.invoice_user_id">
+                            <span t-field="o.invoice_user_id.name"/>
+                        </t>
+                    </div>                   
                 </div>
             </t>
         </template>
@@ -243,6 +291,17 @@
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-set="lang" t-value="o.partner_id.lang"/>
+                    <t t-set="print_facsimile" t-value="False"/>
+                    <t t-call="mo_invoice_ua_form.invoice_rahunok_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+        <template id="invoice_rahunok_facsimile">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.partner_id.lang"/>
+                    <t t-set="print_facsimile" t-value="True"/>
                     <t t-call="mo_invoice_ua_form.invoice_rahunok_document" t-lang="lang"/>
                 </t>
             </t>

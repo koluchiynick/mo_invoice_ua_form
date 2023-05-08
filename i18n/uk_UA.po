@@ -6,25 +6,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-20 10:04+0000\n"
-"PO-Revision-Date: 2022-07-20 10:04+0000\n"
+"POT-Creation-Date: 2023-05-08 14:02+0000\n"
+"PO-Revision-Date: 2023-05-08 17:13+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"X-Generator: Poedit 3.2.2\n"
 
 #. module: mo_invoice_ua_form
 #: model:ir.actions.report,print_report_name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_akt
+#: model:ir.actions.report,print_report_name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_akt_facsimile
 msgid "'Akt - %s' % (object.name)"
 msgstr "'Акт надання послуг - %s' % (object.name)"
 
 #. module: mo_invoice_ua_form
 #: model:ir.actions.report,print_report_name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_rah
+#: model:ir.actions.report,print_report_name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_rah_facsimile
 msgid "'Invoice - %s' % (object.name)"
 msgstr "'Рахунок на оплату - %s' % (object.name)"
 
+#. module: mo_invoice_ua_form
+#: model:ir.actions.report,print_report_name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_invoice
+#: model:ir.actions.report,print_report_name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_invoice_facsimile
+msgid "'InvoiceUA - %s' % (object.name)"
+msgstr "'ІнвойсUA - %s‘ % (object.name)"
 
 #. module: mo_invoice_ua_form
 #: model:ir.actions.report,name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_akt
@@ -32,9 +41,36 @@ msgid "Akt UA"
 msgstr "Акт про надання послуг"
 
 #. module: mo_invoice_ua_form
+#: model:ir.actions.report,name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_akt_facsimile
+msgid "Akt UA (Facsimile)"
+msgstr "Акт про надання послуг (Факсіміле)"
+
+#. module: mo_invoice_ua_form
+#: model:ir.model,name:mo_invoice_ua_form.model_res_bank
+msgid "Bank"
+msgstr "Банк"
+
+#. module: mo_invoice_ua_form
+#: model:ir.model.fields,help:mo_invoice_ua_form.field_res_partner__mo_main_bank_account_id
+#: model:ir.model.fields,help:mo_invoice_ua_form.field_res_users__mo_main_bank_account_id
+msgid "Bank account number to which the invoice will be paid by default."
+msgstr "Номер банківського рахунку, на який інвойс буде сплачено за замовчуванням."
+
+#. module: mo_invoice_ua_form
+#: model:ir.model,name:mo_invoice_ua_form.model_res_company
+msgid "Companies"
+msgstr "Компанії"
+
+#. module: mo_invoice_ua_form
 #: model:ir.model,name:mo_invoice_ua_form.model_res_partner
 msgid "Contact"
 msgstr "Контакт"
+
+#. module: mo_invoice_ua_form
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_bank__mo_correspondent_bank_ids
+#: model_terms:ir.ui.view,arch_db:mo_invoice_ua_form.view_bank_form
+msgid "Correspondent bank"
+msgstr "Банк-кореспондент"
 
 #. module: mo_invoice_ua_form
 #: model:ir.model,name:mo_invoice_ua_form.model_res_currency
@@ -42,52 +78,43 @@ msgid "Currency"
 msgstr "Валюта"
 
 #. module: mo_invoice_ua_form
-#: model:ir.model.fields,help:mo_invoice_ua_form.field_res_currency__mo_currency_subunit_print_label
-msgid "Currency Subunit Print Name"
-msgstr "'Копейки имя для печати"
-
-#. module: mo_invoice_ua_form
-#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_currency__mo_currency_subunit_print_label
-msgid "Currency Subunit print label"
-msgstr "Копейки имя для печати"
-
-#. module: mo_invoice_ua_form
-#: model:ir.model.fields,help:mo_invoice_ua_form.field_res_currency__mo_currency_unit_print_label
-msgid "Currency Unit Print Name"
-msgstr "Имя для печати"
-
-#. module: mo_invoice_ua_form
-#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_currency__mo_currency_unit_print_label
-msgid "Currency Unit print label"
-msgstr "Имя для печати"
-
-#. module: mo_invoice_ua_form
-#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_library_member__mo_document_signer
 #: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_partner__mo_document_signer
 #: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_users__mo_document_signer
 msgid "Document signer"
 msgstr "Подписант документов"
 
 #. module: mo_invoice_ua_form
-#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_library_member__mo_edrpou
 #: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_partner__mo_edrpou
 #: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_users__mo_edrpou
 msgid "EDRPOU"
 msgstr "ЄДРПОУ"
 
 #. module: mo_invoice_ua_form
-#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_library_member__mo_full_name
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_company__sign_image
+msgid "Facsimile signature"
+msgstr "Факсиміле підпису"
+
+#. module: mo_invoice_ua_form
 #: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_partner__mo_full_name
 #: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_users__mo_full_name
 msgid "Full name"
 msgstr "Полное наименование"
 
 #. module: mo_invoice_ua_form
-#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_library_member__mo_income_tax_payer
 #: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_partner__mo_income_tax_payer
 #: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_users__mo_income_tax_payer
 msgid "Income Tax Payer"
 msgstr "Платник податку на прибуток"
+
+#. module: mo_invoice_ua_form
+#: model:ir.actions.report,name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_invoice
+msgid "Invoice UA"
+msgstr "Інвойс UA"
+
+#. module: mo_invoice_ua_form
+#: model:ir.actions.report,name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_invoice_facsimile
+msgid "Invoice UA (Facsimile)"
+msgstr "Інвойс UA (Факсіміле)"
 
 #. module: mo_invoice_ua_form
 #: model:ir.actions.report,name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_rah
@@ -95,7 +122,12 @@ msgid "Invoice UA Rahunok"
 msgstr "Рахунок на оплату"
 
 #. module: mo_invoice_ua_form
-#: model:ir.model,name:mo_invoice_ua_form.model_account_move
-msgid "Journal Entry"
-msgstr "Запис у журналі"
+#: model:ir.actions.report,name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_rah_facsimile
+msgid "Invoice UA Rahunok (Facsimile)"
+msgstr "Рахунок на оплату (Факсіміле)"
 
+#. module: mo_invoice_ua_form
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_partner__mo_main_bank_account_id
+#: model:ir.model.fields,field_description:mo_invoice_ua_form.field_res_users__mo_main_bank_account_id
+msgid "Main bank account"
+msgstr "Основний банківський рахунок"

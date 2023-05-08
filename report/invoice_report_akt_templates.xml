@@ -5,26 +5,26 @@
 
         <template id="invoice_akt_document">
             <t t-call="web.basic_layout">
-            <!-- <t t-call="web.external_layout"> -->
-                <t t-set="o" t-value="o.with_context(lang=lang)" />
+                <t t-set="o" t-value="o.with_context(lang='uk_UA')"/>
+                <t t-set="currency" t-value="o.currency_id"/>
                 
-                
-                <div class="page" style="width: 210mm; display: block">
+                <div class="page">
                     <br/>
                     <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
                             <td style="width: 45%; vertical-align: top;">
-                                <div style=" padding-left:2px; ">ЗАТВЕРДЖУЮ</div>
-                                <br/>
-                                <div style="padding-left:2px;">
-                                    <t t-if="o.company_id.partner_id.mo_document_signer.function">
+                                <div style="height: 35px;">ЗАТВЕРДЖУЮ</div>
+                                <t t-if="o.company_id.partner_id.mo_document_signer.function">
+                                    <div>
                                         <span t-field="o.company_id.partner_id.mo_document_signer.function"/>
-                                    </t>
-                                    <t t-else="">
-                                        <br/>
-                                    </t>
-                                </div>                
-                                <div style="font-weight:bold;  padding-left:2px;">
+                                    </div>                
+                                </t>
+                                <t t-else="">
+                                    <div style="height: 24px;">
+                                        <span/>
+                                    </div>               
+                                </t>                                
+                                <div style="font-weight:bold;">
                                     <t t-if="o.company_id.partner_id.mo_full_name">
                                         <span t-field="o.company_id.partner_id.mo_full_name"></span>
                                     </t>
@@ -32,48 +32,64 @@
                                         <span t-field="o.company_id.partner_id.name"/>
                                     </t>
                                 </div>
-                                <br/>
-                                <div style="padding-left:2px;">
-                                    <span style="white-space:nowrap;">________________________</span>
+                                <div style="height: 40px">
+                                    <t t-if="print_facsimile">
+                                        <img style="max-height:100px; max-width:100px; position: relative; "
+                                                t-att-src="'data:image/png;base64,%s' % to_text(o.company_id.sign_image)"/>
+                                    </t>                                    
                                 </div>
-                                <div style="padding-left:2px;">
-                                    <t t-if="o.company_id.partner_id.mo_document_signer">
+                                <div>
+                                    <span>________________________</span>
+                                </div>
+                                <t t-if="o.company_id.partner_id.mo_document_signer">
+                                    <div>
                                         <span t-field="o.company_id.partner_id.mo_document_signer.name"/>
-                                    </t>
-                                </div>                
+                                    </div>                
+                                </t>
+                                <t t-else="">
+                                    <div style="height: 24px;">
+                                        <span/>
+                                    </div>                
+                                </t>                               
                             </td>
                             <td style="width: 10%; vertical-align: top;">
                                 <div>
                                 </div>
                             </td>
                             <td style="width: 45%; vertical-align: top;">
-                                <div style=" padding-left:2px; ">ЗАТВЕРДЖУЮ</div>
-                                <br/>
-                                <div style="padding-left:2px;">
-                                    <t t-if="o.partner_id.mo_document_signer.function">
+                                <div style="height: 35px;">ЗАТВЕРДЖУЮ</div>
+                                <t t-if="o.partner_id.mo_document_signer.function">
+                                    <div>
                                         <span t-field="o.partner_id.mo_document_signer.function"/>
-                                    </t>
-                                    <t t-else="">
-                                        <br/>
-                                    </t>
-                                </div>                
-                                <div style="font-weight:bold;  padding-left:2px;">
+                                    </div>                
+                                </t>
+                                <t t-else="">
+                                    <div style="height: 24px;">
+                                        <span/>
+                                    </div>               
+                                </t>                                            
+                                <div style="font-weight:bold;">
                                     <t t-if="o.company_id.partner_id.mo_full_name">
                                         <span t-field="o.partner_id.mo_full_name"></span>
                                     </t>
                                     <t t-else="">
                                         <span t-field="o.partner_id.name"/>
-                                    </t>
+                                    </t>                                    
                                 </div>
-                                <br/>
-                                <div style="padding-left:2px;">
-                                    <span style="white-space:nowrap;">________________________</span>
+                                <div style="height:40px;"></div> 
+                                <div>
+                                    <span>________________________</span>
                                 </div>
-                                <div style="padding-left:2px;">
-                                    <t t-if="o.partner_id.mo_document_signer">
+                                <t t-if="o.partner_id.mo_document_signer">
+                                    <div>
                                         <span t-field="o.partner_id.mo_document_signer.name"/>
-                                    </t>
-                                </div>                
+                                    </div>                
+                                </t>
+                                <t t-else="">
+                                    <div style="height: 24px;">
+                                        <span/>
+                                    </div>                
+                                </t>                                            
                             </td>
                         </tr>
                     </table>
@@ -236,10 +252,10 @@
                         </t>
                         
                     </table>
-                
-                    <div>
+
+                   <div>
                         <br/>
-                        <span t-esc="'Загальна вартість робіт (послуг) склала {}'.format(o.amount_to_ukr_text(o.amount_total))"/>
+                        <span t-esc="'Загальна вартість робіт (послуг) склала {} у т.ч. ПДВ: {}'.format(currency.amount_to_text(o.amount_total).capitalize(),currency.amount_to_text(o.amount_tax))"/>
                         <br/>
                     </div>
                     <div>
@@ -251,33 +267,38 @@
                     <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
                             <td style="width: 45%; vertical-align: top; ">
-                                <div style=" padding-left:2px; font-weight: bold; font-size: 16pt; padding-left:5px; font-family: Arial;">
+                                <div style="font-weight: bold; font-size: 16pt; font-family: Arial;">
                                     Від Виконавця*
                                 </div>
-                                <br/>
-                                <div style="padding-left:2px; ">
-                                    <span style="white-space:nowrap;">________________________</span>
+                                <div style="height: 40px">
+                                    <t t-if="print_facsimile">
+                                        <img style="max-height:100px; max-width:100px; position: relative; "
+                                                t-att-src="'data:image/png;base64,%s' % to_text(o.company_id.sign_image)"/>
+                                    </t>                                    
                                 </div>
-                                <div style="padding-left:2px;">
+                                <div>
+                                    <span>________________________</span>
+                                </div>
+                                <div >
                                     <span>
                                         * Відповідальний за здійснення господарської операції і правильність її оформлення
                                     </span>
                                 </div>
-                                <div style=" padding-left:2px; font-weight: bold; font-size: 14pt; padding-left:5px; font-family: Arial;">
+                                <div style="font-weight: bold; font-size: 14pt; font-family: Arial;">
                                     <span t-field="o.invoice_date" t-options="{'format': 'dd.MM.YYYY'}"/>
                                 </div>
-                                <div style="padding-left:2px; ">
+                                <div >
                                     <t t-if="o.company_id.partner_id.name">
                                         <span t-field="o.company_id.partner_id.name">,</span>
                                     </t>
                                     <t t-else="">
                                         <span t-field="o.company_id.partner_id.name"/>,
                                     </t>
-                                    <span>ІНП <span t-field="o.company_id.partner_id.vat"/>,</span>
+                                    <span>ІПН <span t-field="o.company_id.partner_id.vat"/>,</span>
                                     <span>ЄДРПОУ <span t-field="o.company_id.company_registry"/>,</span>
-                                    <span>р/р <span t-field="o.company_id.partner_id.bank_ids.acc_number"/>
-                                        <t t-if="o.company_id.partner_id.bank_ids.bank_id">
-                                            в <span t-field="o.company_id.partner_id.bank_ids.bank_id.name"/>
+                                    <span>р/р <span t-field="o.company_id.partner_id.mo_main_bank_account_id.acc_number"/>
+                                        <t t-if="o.company_id.partner_id.mo_main_bank_account_id.bank_id">
+                                            в <span t-field="o.company_id.partner_id.mo_main_bank_account_id.bank_id.name"/>
                                         </t>,
                                     </span>
                                     <span>Адреса: <span t-field="o.company_id.partner_id.contact_address" />,</span>
@@ -296,16 +317,16 @@
                                 </div>
                             </td>
                             <td style="width: 45%; vertical-align: top;">
-                                <div style="padding-left:2px; font-weight: bold; font-size: 16pt; font-family: Arial;">
+                                <div style="font-weight: bold; font-size: 16pt; font-family: Arial;">
                                     Від Замовника
                                 </div>
-                                <br/>
-                                <div style="padding-left:2px;">
-                                    <span style="white-space:nowrap;">________________________</span>
+                                <div style="height:40px;"></div>
+                                <div >
+                                    <span>________________________</span>
                                 </div>
                                 <br/>
                                 <br/>
-                                <div style=" padding-left:2px; font-weight: bold; font-size: 14pt; padding-left:5px; font-family: Arial;">
+                                <div style="font-weight: bold; font-size: 14pt; font-family: Arial;">
                                     <span t-field="o.invoice_date" t-options="{'format': 'dd.MM.YYYY'}"/>
                                 </div>
                                 <div>
@@ -316,7 +337,7 @@
                                         <span t-field="o.partner_id.name"/>,
                                     </t>
                                     <t t-if="o.partner_id.vat">
-                                        <span>ІНП <span t-field="o.partner_id.vat"/>,</span>
+                                        <span>ІПН <span t-field="o.partner_id.vat"/>,</span>
                                     </t>
                                     <t t-if="o.partner_id.vat">
                                         <span>ЄДРПОУ <span t-field="o.partner_id.vat"/>,</span>
@@ -341,6 +362,17 @@
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-set="lang" t-value="o.partner_id.lang"/>
+                    <t t-set="print_facsimile" t-value="False"/>
+                    <t t-call="mo_invoice_ua_form.invoice_akt_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+        <template id="invoice_akt_facsimile">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.partner_id.lang"/>
+                    <t t-set="print_facsimile" t-value="True"/>
                     <t t-call="mo_invoice_ua_form.invoice_akt_document" t-lang="lang"/>
                 </t>
             </t>
