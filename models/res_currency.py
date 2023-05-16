@@ -1,16 +1,15 @@
 from num2words import num2words
 
-from odoo import models, fields, tools
+from odoo import models, tools
 
 
 class Currency(models.Model):
     _inherit = "res.currency"
 
-
     def amount_to_text(self, amount, lang_print='uk'):
         self.ensure_one()
         lang = tools.get_lang(self.env)
-        
+
         if lang.iso_code == 'uk':
             if amount:
                 return num2words(
@@ -21,11 +20,8 @@ class Currency(models.Model):
                     cents=False,
                     currency=self.name,
                 )
-            else:
-                return ''
-
-        else:
-            return super().amount_to_text(amount)
+            return ''
+        return super().amount_to_text(amount)
 
     def currency_name_to_ua(self):
         self.ensure_one()

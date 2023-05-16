@@ -12,4 +12,3 @@ class ResBank(models.Model):
         string='Correspondent bank',
         copy=True,
         auto_join=True)
-    

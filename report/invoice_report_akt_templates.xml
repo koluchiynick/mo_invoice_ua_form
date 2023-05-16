@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>    
-        
-
+    
         <template id="invoice_akt_document">
             <t t-call="web.basic_layout">
                 <t t-set="o" t-value="o.with_context(lang='uk_UA')"/>
@@ -301,7 +299,7 @@
                                             в <span t-field="o.company_id.partner_id.mo_main_bank_account_id.bank_id.name"/>
                                         </t>,
                                     </span>
-                                    <span>Адреса: <span t-field="o.company_id.partner_id.contact_address" />,</span>
+                                    <span>Адреса: <span t-esc="o.company_id.partner_id.adress_for_invoce_ua()" />,</span>
                                     <span>тел.: <span t-field="o.company_id.partner_id.phone"/>,</span>
                                     <t t-if="o.company_id.partner_id.mo_income_tax_payer">
                                         <span>Є платником податку на прибуток на загальних підставах</span>
@@ -343,7 +341,7 @@
                                         <span>ЄДРПОУ <span t-field="o.partner_id.vat"/>,</span>
                                     </t>
                                     <t t-if="o.partner_id.contact_address">
-                                        <span>Адреса: <span t-field="o.partner_id.contact_address" />,</span>
+                                        <span>Адреса: <span t-esc="o.partner_id.adress_for_invoce_ua()" />,</span>                                        
                                     </t>
                                     <t t-if="o.partner_id.phone">
                                         <span>тел.: <span t-field="o.partner_id.phone"/></span>
@@ -378,5 +376,5 @@
             </t>
         </template>
     
-    </data>
+   
 </odoo>

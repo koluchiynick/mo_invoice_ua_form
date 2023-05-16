@@ -33,7 +33,7 @@ msgstr "'Рахунок на оплату - %s' % (object.name)"
 #: model:ir.actions.report,print_report_name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_invoice
 #: model:ir.actions.report,print_report_name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_invoice_facsimile
 msgid "'InvoiceUA - %s' % (object.name)"
-msgstr "'ІнвойсUA - %s‘ % (object.name)"
+msgstr "'ІнвойсUA - %s' % (object.name)"
 
 #. module: mo_invoice_ua_form
 #: model:ir.actions.report,name:mo_invoice_ua_form.mo_invoice_ua_form_action_report_akt

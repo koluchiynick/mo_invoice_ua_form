@@ -16,5 +16,10 @@ class Partner(models.Model):
         comodel_name='res.partner.bank',
         string="Main bank account",
         domain="[('partner_id', '=', id)]",
-        help="Bank account number to which the invoice will be paid by default."
+        help="Bank account number to which the invoice will be paid by default"
     )
+    street = fields.Char(translate=True)
+    city = fields.Char(translate=True)
+
+    def adress_for_invoce_ua(self):
+        return self._display_address(without_company=True)
