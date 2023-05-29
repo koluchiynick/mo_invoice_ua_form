@@ -117,7 +117,7 @@
                     <div>
                         <span t-esc="'Ми, що нижче підписалися, представники Замовника {}, з одного боку,
                         і представник Виконавця {}, з іншого боку, 
-                        склали цей акт про те, що на підставі наведених документів:'.format(company_full_name,partner_full_name)"/>
+                        склали цей акт про те, що на підставі наведених документів:'.format(partner_full_name,company_full_name)"/>
                     </div>
                     <table width="100%" style="font-family: Arial;">
                         <t t-if="not is_html_empty(o.narration)">
@@ -253,7 +253,12 @@
 
                    <div>
                         <br/>
-                        <span t-esc="'Загальна вартість робіт (послуг) склала {} у т.ч. ПДВ: {}'.format(currency.amount_to_text(o.amount_total).capitalize(),currency.amount_to_text(o.amount_tax))"/>
+                        <t t-if="o.amount_tax>0">
+                            <span t-esc="'Загальна вартість робіт (послуг) склала {} у т.ч. ПДВ: {}'.format(currency.amount_to_text(o.amount_total).capitalize(),currency.amount_to_text(o.amount_tax))"/>
+                        </t>
+                        <t t-else="">
+                            <span t-esc="'Загальна вартість робіт (послуг) склала {}.'.format(currency.amount_to_text(o.amount_total).capitalize())"/>
+                        </t>
                         <br/>
                     </div>
                     <div>
