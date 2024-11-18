@@ -13,10 +13,14 @@
                     </group>
                 </xpath>
                 <xpath expr="//field[@name='vat']" position="after">
-                    <field name="mo_edrpou" attrs="{'invisible': [('is_company', '=', False)]}"/>
-                    <field name="mo_main_bank_account_id" attrs="{'invisible': [('is_company', '=', False)]}"/>
-                    <field name="mo_income_tax_payer" attrs="{'invisible': [('is_company', '=', False)]}"/>
-                    <field name="mo_document_signer" widget="res_partner_many2one" domain="[('is_company', '=', False)]" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                    <!-- <field name="mo_edrpou" attrs="{'invisible': [('is_company', '=', False)]}"/> -->
+                    <field name="mo_edrpou" modifiers="{'invisible': [('is_company', '=', False)]}"/>
+                    <!-- <field name="mo_main_bank_account_id" attrs="{'invisible': [('is_company', '=', False)]}"/> -->
+                    <field name="mo_main_bank_account_id" modifiers="{'invisible': [('is_company', '=', False)]}"/>
+                    <!-- <field name="mo_income_tax_payer" attrs="{'invisible': [('is_company', '=', False)]}"/> -->
+                    <field name="mo_income_tax_payer" modifiers="{'invisible': [('is_company', '=', False)]}"/>
+                    <!-- <field name="mo_document_signer" widget="res_partner_many2one" domain="[('is_company', '=', False)]" attrs="{'invisible': [('is_company', '=', False)]}"/> -->
+                    <field name="mo_document_signer" widget="res_partner_many2one" domain="[('is_company', '=', False)]" modifiers="{'invisible': [('is_company', '=', False)]}"/>
                 </xpath>
             </field>
         </record>    
